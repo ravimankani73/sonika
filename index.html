@@ -1,334 +1,274 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Valentine Week 💖</title>
+<meta charset="UTF-8">
+<title>Valentine Week 💖</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
+<style>
+  * {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
 
-    body {
-      margin: 0;
-      height: 100vh;
-      overflow: hidden;
-      background: #000;
-      color: white;
-    }
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+    color: white;
+  }
 
-    /* Background */
-    .bg {
-      position: fixed;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      opacity: 0.28;
-      filter: blur(2px);
-      transition: background-image 1s ease;
-      z-index: 1;
-    }
+  /* Background */
+  .bg {
+    position: fixed;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.28;
+    filter: blur(2px);
+    transition: background-image 1s ease;
+    z-index: 1;
+  }
 
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(
-        180deg,
-        rgba(255, 80, 120, 0.45),
-        rgba(0, 0, 0, 0.9)
-      );
-      z-index: 2;
-    }
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 80, 120, 0.45),
+      rgba(0, 0, 0, 0.9)
+    );
+    z-index: 2;
+  }
 
-    /* Layout */
-    .container {
-      position: relative;
-      z-index: 5;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-      padding: 20px;
-    }
+  /* Layout */
+  .container {
+    position: relative;
+    z-index: 5;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
 
-    h1 {
-      font-size: 48px;
-      margin-bottom: 35px;
-      letter-spacing: 1px;
-    }
+  h1 {
+    font-size: 48px;
+    margin-bottom: 35px;
+    letter-spacing: 1px;
+  }
 
-    /* Calendar grid */
-    .calendar {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 22px;
-      max-width: 1000px;
-      width: 100%;
-    }
+  /* Calendar grid */
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 22px;
+    max-width: 1000px;
+    width: 100%;
+  }
 
-    .day {
-      padding: 26px 20px;
-      border-radius: 24px;
-      background: rgba(255, 255, 255, 0.14);
-      backdrop-filter: blur(10px);
-      cursor: pointer;
-      transition: all 0.35s ease;
-      position: relative;
-      overflow: hidden;
-    }
+  .day {
+    padding: 26px 20px;
+    border-radius: 24px;
+    background: rgba(255,255,255,0.14);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+  }
 
-    .day.disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
+  .day.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 
-    .day::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(255, 255, 255, 0.25),
-        transparent
-      );
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
+  .day::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
 
-    .day:hover::after {
-      opacity: 1;
-    }
+  .day:hover::after {
+    opacity: 1;
+  }
 
-    .day:hover {
-      transform: translateY(-10px) scale(1.06);
-    }
+  .day:hover {
+    transform: translateY(-10px) scale(1.06);
+  }
 
-    .emoji {
-      font-size: 34px;
-      display: block;
-      margin-bottom: 10px;
-    }
+  .emoji {
+    font-size: 34px;
+    display: block;
+    margin-bottom: 10px;
+  }
 
-    .day-name {
-      font-size: 22px;
-      font-weight: 600;
-    }
+  .day-name {
+    font-size: 22px;
+    font-weight: 600;
+  }
 
-    .date {
-      margin-top: 6px;
-      font-size: 16px;
-      opacity: 0.85;
-    }
+  .date {
+    margin-top: 6px;
+    font-size: 16px;
+    opacity: 0.85;
+  }
 
-    /* Day view */
-    .day-view {
-      display: none;
-      animation: fadeIn 0.9s ease forwards;
-    }
+  /* Day view */
+  .day-view {
+    display: none;
+    animation: fadeIn 0.9s ease forwards;
+  }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: scale(0.94);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.94); }
+    to { opacity: 1; transform: scale(1); }
+  }
 
-    .back {
-      margin-top: 40px;
-      padding: 14px 36px;
-      border-radius: 40px;
-      border: none;
-      cursor: pointer;
-      font-size: 18px;
-      background: linear-gradient(135deg, #ff2d55, #ff6f91);
-      color: white;
-      box-shadow: 0 12px 30px rgba(255, 45, 85, 0.5);
-    }
+  .back {
+    margin-top: 40px;
+    padding: 14px 36px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    background: linear-gradient(135deg, #ff2d55, #ff6f91);
+    color: white;
+    box-shadow: 0 12px 30px rgba(255,45,85,0.5);
+  }
 
-    /* Clickable day title/date */
-    #dayTitle,
-    #dayDate {
-      transition: all 0.3s ease;
-    }
+  /* Clickable day title/date */
+  #dayTitle, #dayDate {
+    transition: all 0.3s ease;
+  }
 
-    #dayTitle:hover,
-    #dayDate:hover {
-      opacity: 0.8;
-    }
-
-    /* Floating hearts */
-    .heart {
-      position: fixed;
-      bottom: -30px;
-      font-size: 20px;
-      pointer-events: none;
-      animation: floatUp linear forwards;
-      z-index: 3;
-      opacity: 0.8;
-    }
-
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.9;
-      }
-      100% {
-        transform: translateY(-110vh) scale(1.6);
-        opacity: 0;
-      }
-    }
-  </style>
+  #dayTitle:hover, #dayDate:hover {
+    opacity: 0.8;
+  }
+</style>
 </head>
-
 <body>
-  <div class="bg" id="bg"></div>
-  <div class="overlay"></div>
 
-  <div class="container">
-    <!-- CALENDAR -->
-    <div id="calendar">
-      <h1>Hey Sonika, Here’s Your Valentine Week 💘</h1>
+<div class="bg" id="bg"></div>
+<div class="overlay"></div>
 
-      <div class="calendar">
-        <div class="day" data-date="2026-02-07"
-             onclick="openDay('🌹 Rose Day','7 February','bg-rose.jpg')">
-          <span class="emoji">🌹</span>
-          <div class="day-name">Rose Day</div>
-          <div class="date">7 February</div>
-        </div>
+<div class="container">
 
-        <div class="day" data-date="2026-02-08"
-             onclick="openDay('💍 Propose Day','8 February','bg-propose.jpg')">
-          <span class="emoji">💍</span>
-          <div class="day-name">Propose Day</div>
-          <div class="date">8 February</div>
-        </div>
+  <!-- CALENDAR -->
+  <div id="calendar">
+    <h1>Valentine Week 💘</h1>
 
-        <div class="day" data-date="2026-02-09"
-             onclick="openDay('🍫 Chocolate Day','9 February','bg-chocolate.jpg')">
-          <span class="emoji">🍫</span>
-          <div class="day-name">Chocolate Day</div>
-          <div class="date">9 February</div>
-        </div>
-
-        <div class="day" data-date="2026-02-10"
-             onclick="window.location.href='teddy-day.html'">
-          <span class="emoji">🧸</span>
-          <div class="day-name">Teddy Day</div>
-          <div class="date">10 February</div>
-        </div>
-
-        <div class="day" data-date="2026-02-11"
-             onclick="window.location.href='hug-day.html'">
-          <span class="emoji">🤗</span>
-          <div class="day-name">Hug Day</div>
-          <div class="date">11 February</div>
-        </div>
-
-        <div class="day" data-date="2026-02-12"
-             onclick="window.location.href='kiss-day.html'">
-          <span class="emoji">💋</span>
-          <div class="day-name">Kiss Day</div>
-          <div class="date">12 February</div>
-        </div>
-
-        <div class="day" data-date="2026-02-14"
-             onclick="window.location.href='14feb.html'">
-          <span class="emoji">💖</span>
-          <div class="day-name">Valentine’s Day</div>
-          <div class="date">14 February</div>
-        </div>
+    <div class="calendar">
+      <div class="day" data-date="2026-02-07" onclick="openDay('🌹 Rose Day','7 February','bg-rose.jpg')">
+        <span class="emoji">🌹</span>
+        <div class="day-name">Rose Day</div>
+        <div class="date">7 February</div>
       </div>
-    </div>
 
-    <!-- DAY VIEW -->
-    <div class="day-view" id="dayView">
-      <h1 id="dayTitle"></h1>
-      <p id="dayDate" style="font-size:20px; opacity:0.85;"></p>
-      <p style="font-size:22px; margin-top:20px; opacity:0.9;">
-        A day made just for love 💕
-      </p>
-      <button class="back" onclick="goBack()">⬅ Back to Calendar</button>
+      <div class="day" data-date="2026-02-08" onclick="openDay('💍 Propose Day','8 February','bg-propose.jpg')">
+        <span class="emoji">💍</span>
+        <div class="day-name">Propose Day</div>
+        <div class="date">8 February</div>
+      </div>
+
+      <div class="day" data-date="2026-02-09" onclick="openDay('🍫 Chocolate Day','9 February','bg-chocolate.jpg')">
+        <span class="emoji">🍫</span>
+        <div class="day-name">Chocolate Day</div>
+        <div class="date">9 February</div>
+      </div>
+
+      <div class="day" data-date="2026-02-10" onclick="window.location.href='teddy-day.html'">
+        <span class="emoji">🧸</span>
+        <div class="day-name">Teddy Day</div>
+        <div class="date">10 February</div>
+      </div>
+
+      <div class="day" data-date="2026-02-11" onclick="window.location.href='hug-day.html'">
+        <span class="emoji">🤗</span>
+        <div class="day-name">Hug Day</div>
+        <div class="date">11 February</div>
+      </div>
+
+      <div class="day" data-date="2026-02-12" onclick="window.location.href='kiss-day.html'">
+        <span class="emoji">💋</span>
+        <div class="day-name">Kiss Day</div>
+        <div class="date">12 February</div>
+      </div>
+
+      <div class="day" data-date="2026-02-14" onclick="window.location.href='14feb.html'">
+        <span class="emoji">💖</span>
+        <div class="day-name">Valentine’s Day</div>
+        <div class="date">14 February</div>
+      </div>
     </div>
   </div>
 
-  <script>
-    const calendar = document.getElementById("calendar");
-    const dayView = document.getElementById("dayView");
-    const dayTitle = document.getElementById("dayTitle");
-    const dayDate = document.getElementById("dayDate");
-    const bg = document.getElementById("bg");
+  <!-- DAY VIEW -->
+  <div class="day-view" id="dayView">
+    <h1 id="dayTitle"></h1>
+    <p id="dayDate" style="font-size:20px; opacity:0.85;"></p>
+    <p style="font-size:22px; margin-top:20px; opacity:0.9;">
+      A day made just for love 💕
+    </p>
 
-    // Enable only today's day
-    const today = new Date();
-    const todayStr = today.toISOString().split("T")[0];
+    <button class="back" onclick="goBack()">⬅ Back to Calendar</button>
+  </div>
 
-    document.querySelectorAll(".day").forEach(day => {
-      const dayDateAttr = day.getAttribute("data-date");
-      if (dayDateAttr !== todayStr) {
-        day.classList.add("disabled");
-        day.onclick = null;
-      }
-    });
+</div>
 
-    function openDay(title, date, image, designPage = null) {
-      calendar.style.display = "none";
-      dayView.style.display = "block";
+<script>
+  const calendar = document.getElementById("calendar");
+  const dayView = document.getElementById("dayView");
+  const dayTitle = document.getElementById("dayTitle");
+  const dayDate = document.getElementById("dayDate");
+  const bg = document.getElementById("bg");
 
-      dayTitle.innerText = title;
-      dayDate.innerText = date;
-      bg.style.backgroundImage = `url('${image}')`;
+  // -------------------------
+  // Enable only today's day
+  // -------------------------
+  const today = new Date();
+  const todayStr = today.toISOString().split('T')[0]; // YYYY-MM-DD
 
-      if (designPage) {
-        dayTitle.style.cursor = "pointer";
-        dayDate.style.cursor = "pointer";
-        dayTitle.onclick = () => window.location.href = designPage;
-        dayDate.onclick = () => window.location.href = designPage;
-      } else {
-        dayTitle.onclick = null;
-        dayDate.onclick = null;
-        dayTitle.style.cursor = "default";
-        dayDate.style.cursor = "default";
-      }
+  document.querySelectorAll('.day').forEach(day => {
+    const dayDateAttr = day.getAttribute('data-date');
+    if (dayDateAttr !== todayStr) {
+      // Disable future/past dates
+      day.classList.add('disabled');
+      day.onclick = null; // remove click
     }
+  });
 
-    function goBack() {
-      dayView.style.display = "none";
-      calendar.style.display = "block";
-      bg.style.backgroundImage = "";
+  function openDay(title, date, image, designPage = null) {
+    calendar.style.display = "none";
+    dayView.style.display = "block";
+    dayTitle.innerText = title;
+    dayDate.innerText = date;
+    bg.style.backgroundImage = `url('${image}')`;
+
+    if (designPage) {
+      dayTitle.style.cursor = "pointer";
+      dayDate.style.cursor = "pointer";
+      dayTitle.onclick = () => window.location.href = designPage;
+      dayDate.onclick = () => window.location.href = designPage;
+    } else {
+      dayTitle.onclick = null;
+      dayDate.onclick = null;
+      dayTitle.style.cursor = "default";
+      dayDate.style.cursor = "default";
     }
+  }
 
-    // Floating Hearts Animation
-    const heartEmojis = ["💖", "💕", "💗", "💘", "❤️"];
+  function goBack() {
+    dayView.style.display = "none";
+    calendar.style.display = "block";
+    bg.style.backgroundImage = "";
+  }
+</script>
 
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.className = "heart";
-      heart.innerText =
-        heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
-
-      const size = Math.random() * 20 + 14;
-      heart.style.fontSize = size + "px";
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = Math.random() * 4 + 6 + "s";
-
-      document.body.appendChild(heart);
-
-      setTimeout(() => heart.remove(), 10000);
-    }
-
-    setInterval(createHeart, 450);
-  </script>
 </body>
 </html>
