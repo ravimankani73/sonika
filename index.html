@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine Week 💖</title>
+
+<style>
+  * {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+    color: white;
+  }
+
+  /* Background */
+  .bg {
+    position: fixed;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.28;
+    filter: blur(2px);
+    transition: background-image 1s ease;
+    z-index: 1;
+  }
+
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 80, 120, 0.45),
+      rgba(0, 0, 0, 0.9)
+    );
+    z-index: 2;
+  }
+
+  /* Layout */
+  .container {
+    position: relative;
+    z-index: 5;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 48px;
+    margin-bottom: 35px;
+    letter-spacing: 1px;
+  }
+
+  /* Calendar grid */
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 22px;
+    max-width: 1000px;
+    width: 100%;
+  }
+
+  .day {
+    padding: 26px 20px;
+    border-radius: 24px;
+    background: rgba(255,255,255,0.14);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: all 0.35s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .day.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .day::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .day:hover::after {
+    opacity: 1;
+  }
+
+  .day:hover {
+    transform: translateY(-10px) scale(1.06);
+  }
+
+  /* Disable hover animation for disabled cards */
+  .day.disabled:hover {
+    transform: none;
+  }
+
+  .day.disabled::after {
+    opacity: 0;
+  }
+
+  .emoji {
+    font-size: 34px;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .day-name {
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  .date {
+    margin-top: 6px;
+    font-size: 16px;
+    opacity: 0.85;
+  }
+
+  /* Day view */
+  .day-view {
+    display: none;
+    animation: fadeIn 0.9s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.94); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .back {
+    margin-top: 40px;
+    padding: 14px 36px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    background: linear-gradient(135deg, #ff2d55, #ff6f91);
+    color: white;
+    box-shadow: 0 12px 30px rgba(255,45,85,0.5);
+  }
+
+  /* Floating hearts */
+  .heart {
+    position: fixed;
+    bottom: -30px;
+    font-size: 20px;
+    pointer-events: none;
+    animation: floatUp linear forwards;
+    z-index: 3;
+    opacity: 0.8;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(0) scale(1);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.9;
+    }
+    100% {
+      transform: translateY(-110vh) scale(1.6);
+      opacity: 0;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="bg" id="bg"></div>
+<div class="overlay"></div>
+
+<div class="container">
+
+  <!-- CALENDAR -->
+  <div id="calendar">
+    <h1>Hey Sonika, Here’s Your Valentine Week 💘</h1>
+
+    <div class="calendar">
+
+      <!-- Disabled Days -->
+      <div class="day disabled">
+        <span class="emoji">🌹</span>
+        <div class="day-name">Rose Day</div>
+        <div class="date">7 February</div>
+      </div>
+
+      <div class="day disabled">
+        <span class="emoji">💍</span>
+        <div class="day-name">Propose Day</div>
+        <div class="date">8 February</div>
+      </div>
+
+      <div class="day disabled">
+        <span class="emoji">🍫</span>
+        <div class="day-name">Chocolate Day</div>
+        <div class="date">9 February</div>
+      </div>
+
+      <!-- Active Days -->
+      <div class="day" onclick="window.location.href='teddy-day.html'">
+        <span class="emoji">🧸</span>
+        <div class="day-name">Teddy Day</div>
+        <div class="date">10 February</div>
+      </div>
+
+      <div class="day" onclick="window.location.href='hug-day.html'">
+        <span class="emoji">🤗</span>
+        <div class="day-name">Hug Day</div>
+        <div class="date">11 February</div>
+      </div>
+
+      <div class="day" onclick="window.location.href='kiss-day.html'">
+        <span class="emoji">💋</span>
+        <div class="day-name">Kiss Day</div>
+        <div class="date">12 February</div>
+      </div>
+
+      <div class="day" onclick="window.location.href='14feb.html'">
+        <span class="emoji">💖</span>
+        <div class="day-name">Valentine’s Day</div>
+        <div class="date">14 February</div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Floating Hearts Animation
+  const heartEmojis = ["💖", "💕", "💗", "💘", "❤️"];
+
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+
+    heart.style.fontSize = Math.random() * 20 + 14 + "px";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = Math.random() * 4 + 6 + "s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 10000);
+  }
+
+  setInterval(createHeart, 450);
+</script>
+
+</body>
+</html>

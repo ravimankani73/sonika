@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Hug Day 🤗</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  margin:0;
+  height:100vh;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* 🌄 BACKGROUND IMAGE */
+.bg{
+  position:fixed;
+  inset:0;
+  background-image:url('hug.jpg'); /* 👈 CHANGE IMAGE NAME HERE */
+  object-fit: cover;   /* 🔥 fills the entire screen */
+  background-position: 50% 10%;
+  background-repeat:no-repeat;
+  background-size: 70%;
+  opacity: 0.80;
+  filter: blur(1.5px);
+  z-index:1;
+}
+
+/* Soft color overlay */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(135deg,#ffb3c6,#ffe5ec);
+  opacity:0.75;
+  z-index:-1;
+}
+
+/* Hug particles */
+.hug{
+  position:absolute;
+  bottom:-30px;
+  font-size:26px;
+  animation:floatUp linear infinite;
+  opacity:.7;
+  z-index:1;
+}
+
+@keyframes floatUp{
+  to{
+    transform:translateY(-120vh);
+    opacity:0;
+  }
+}
+
+/* Main card */
+.card{
+  background:rgba(255,255,255,0.3);
+  backdrop-filter:blur(12px);
+  padding:45px 55px;
+  border-radius:30px;
+  text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,.2);
+  animation:pulse 3s ease-in-out infinite;
+  z-index:3;
+}
+
+@keyframes pulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.04);}
+}
+
+.emoji{
+  font-size:110px;
+}
+
+.title{
+  font-size:34px;
+  font-weight:600;
+  margin-top:20px;
+  color:#7a1f3d;
+}
+
+.text{
+  margin-top:12px;
+  font-size:18px;
+  opacity:.9;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background layers -->
+<div class="bg"></div>
+<div class="overlay"></div>
+
+<!-- CONTENT -->
+<div class="card">
+  <div class="emoji">🤗</div>
+
+  <!-- ✏️ EDIT YOUR MESSAGE -->
+  <div class="title">Happy Hug Day Sonika</div>
+  <div class="text">
+    Your hugs are my favorite place to be.  
+    They make all my stress disappear and fill my heart with peace and love.
+  </div>
+</div>
+
+<script>
+setInterval(()=>{
+  const hug=document.createElement("div");
+  hug.className="hug";
+  hug.innerText="🤗";
+  hug.style.left=Math.random()*100+"vw";
+  hug.style.fontSize=20+Math.random()*25+"px";
+  hug.style.animationDuration=6+Math.random()*6+"s";
+  document.body.appendChild(hug);
+
+  setTimeout(()=>hug.remove(),12000);
+},500);
+</script>
+
+</body>
+</html>

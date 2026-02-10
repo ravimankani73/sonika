@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>From My Heart 💖</title>
+
+<style>
+  * {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: #000;
+  }
+
+  /* Background image wrapper */
+  .bg-wrapper {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .bg-wrapper img {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: 70% 25%;
+    opacity: 0.80;
+    filter: blur(1.5px);
+  }
+
+  /* Overlay gradient */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle, rgba(255,120,160,0.6), rgba(0,0,0,0.85));
+    z-index: 2;
+  }
+
+  /* Main Heart */
+  .heart {
+    position: absolute;
+    top: 42%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 120px;
+    animation: pulse 1.8s infinite;
+    filter: drop-shadow(0 0 25px rgba(255,45,85,0.9));
+    z-index: 5;
+    pointer-events: none;
+  }
+
+  @keyframes pulse {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.15); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+  }
+
+  /* Message */
+  .message {
+    position: absolute;
+    bottom: 32%;
+    width: 100%;
+    text-align: center;
+    font-size: 38px;
+    color: white;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    z-index: 6;
+  }
+
+  /* Buttons */
+  .choices {
+    position: absolute;
+    bottom: 18%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    z-index: 6;
+  }
+
+  button {
+    padding: 14px 36px;
+    font-size: 20px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+  }
+
+  #yes {
+    background: linear-gradient(135deg, #ff2d55, #ff6f91);
+    color: white;
+    box-shadow: 0 10px 30px rgba(255,45,85,0.6);
+  }
+
+  #yes:hover {
+    transform: scale(1.15);
+  }
+
+  #no {
+    background: rgba(255,255,255,0.15);
+    color: white;
+    backdrop-filter: blur(6px);
+  }
+
+  /* Teasing emoji */
+  .tease {
+    position: fixed;
+    font-size: 26px;
+    animation: pop 1.2s ease forwards;
+    z-index: 10;
+  }
+
+  @keyframes pop {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(1); opacity: 0; }
+  }
+
+  /* ⭐ Blinking heart stars */
+  .heart-particle {
+    position: fixed;
+    pointer-events: none;
+    animation: twinkle 3s infinite ease-in-out;
+    z-index: 4;
+    filter: drop-shadow(0 0 6px rgba(255,105,180,0.8));
+  }
+
+  @keyframes twinkle {
+    0%   { opacity: 0; transform: scale(0.6); }
+    30%  { opacity: 1; transform: scale(1); }
+    60%  { opacity: 0.4; transform: scale(0.8); }
+    100% { opacity: 0; transform: scale(0.6); }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- BACKGROUND IMAGE -->
+<div class="bg-wrapper">
+  <img src="Sonika.jpg" alt="Background image">
+</div>
+
+<div class="overlay"></div>
+
+<div class="heart">💖</div>
+
+<div class="message" id="message">
+  Will you be <span style="color:#ff9bb3">my Valentine Sonika?</span> 💘
+</div>
+
+<div class="choices" id="choices">
+  <button id="yes">Yes 💖</button>
+  <button id="no">No</button>
+</div>
+
+<script>
+  const message = document.getElementById("message");
+  const choices = document.getElementById("choices");
+  const noBtn = document.getElementById("no");
+  const yesBtn = document.getElementById("yes");
+
+  // Reveal message
+  setTimeout(() => {
+    message.style.opacity = 1;
+    choices.style.opacity = 1;
+  }, 800);
+
+  let hoverCount = 0;
+  const emojis = ["😜", "😏", "🙈", "💅", "😌"];
+
+  // No button escapes
+  noBtn.addEventListener("mouseenter", () => {
+    hoverCount++;
+
+    const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+
+    noBtn.style.position = "fixed";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    if (hoverCount >= 2) {
+      const tease = document.createElement("div");
+      tease.className = "tease";
+      tease.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      tease.style.left = x + 20 + "px";
+      tease.style.top = y - 30 + "px";
+      document.body.appendChild(tease);
+      setTimeout(() => tease.remove(), 1200);
+    }
+  });
+
+  // Yes button
+  yesBtn.addEventListener("click", () => {
+    document.body.innerHTML = `
+      <div style="
+        height:100vh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background:radial-gradient(circle,#ff5f9e,#ff2d55);
+        color:white;
+        font-size:30px;
+        text-align:center;
+        padding:30px;
+      ">
+        💕 IT WAS ALWAYS YOU 💕<br><br>
+        Happy Valentine’s My Love 😍<br>
+        You mean the world to me, and I’m so grateful to have you in my life.
+        With you, every day feels more beautiful and full of love.
+      </div>
+    `;
+  });
+
+  /* ⭐ Heart stars generator */
+  function createHeartStar() {
+    const heart = document.createElement("div");
+    heart.className = "heart-particle";
+    heart.innerHTML = "💖";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.top = Math.random() * 100 + "vh";
+    heart.style.fontSize = 12 + Math.random() * 20 + "px";
+    heart.style.animationDuration = 2 + Math.random() * 3 + "s";
+
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+  }
+
+  setInterval(createHeartStar, 300);
+</script>
+
+</body>
+</html>

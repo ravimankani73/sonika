@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Kiss Day 💋</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  margin:0;
+  height:100vh;
+  background:radial-gradient(circle at top,#ff4d6d,#590d22);
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
+}
+
+/* Kiss particles */
+.kiss{
+  position:absolute;
+  bottom:-20px;
+  font-size:24px;
+  animation:rise linear infinite;
+  opacity:.8;
+}
+
+@keyframes rise{
+  to{
+    transform:translateY(-120vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
+/* Card */
+.card{
+  background:rgba(0,0,0,0.35);
+  backdrop-filter:blur(10px);
+  padding:50px 60px;
+  border-radius:32px;
+  text-align:center;
+  box-shadow:0 25px 80px rgba(0,0,0,.4);
+}
+
+.lips{
+  font-size:120px;
+  animation:kissPulse 2.8s ease-in-out infinite;
+}
+
+@keyframes kissPulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.12);}
+}
+
+.title{
+  margin-top:22px;
+  font-size:36px;
+  font-weight:600;
+}
+
+.text{
+  margin-top:14px;
+  font-size:18px;
+  opacity:.9;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <div class="lips">💋</div>
+
+  <!-- ✏️ EDIT YOUR MESSAGE -->
+  <div class="title">Happy Kiss Day Sonika</div>
+  <div class="text">
+    Every kiss from you feels special and full of love. I can’t wait to steal a soft kiss and see that beautiful smile of yours.
+  </div>
+</div>
+
+<script>
+setInterval(()=>{
+  const kiss=document.createElement("div");
+  kiss.className="kiss";
+  kiss.innerText="💋";
+  kiss.style.left=Math.random()*100+"vw";
+  kiss.style.fontSize=18+Math.random()*24+"px";
+  kiss.style.animationDuration=5+Math.random()*6+"s";
+  document.body.appendChild(kiss);
+
+  setTimeout(()=>kiss.remove(),12000);
+},350);
+</script>
+
+</body>
+</html>
